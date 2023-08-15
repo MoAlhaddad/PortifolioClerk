@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ClerkProvider } from "@clerk/nextjs/app-beta";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,12 +12,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  className
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  className: ""
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <ClerkProvider>
+      <div className={`w-full h-full inline-block z-0 bg-light p-32 ${className}`}>
+      <body >{children}</body>
+</div>      </ClerkProvider>
+      
     </html>
   )
 }
